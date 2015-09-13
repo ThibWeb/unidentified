@@ -1,4 +1,4 @@
-import App from './components/App';
+import App from './containers/App';
 import Hello from './components/Hello';
 
 export default [

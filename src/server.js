@@ -30,23 +30,25 @@ nunjucks.configure('public', {
 app.use((req, res) => {
     const location = createLocation(req.url);
 
-    match({ routes, location }, (error, redirectLoc, renderProps) => {
-        if (redirectLoc) {
-            res.redirect(301, redirectLoc.pathname + redirectLoc.search);
-        } else if (error) {
-            res.status(500).send(error.message);
-        } else if (renderProps === null) {
-            res.status(404).send('Not found');
-        } else {
-            const elt = React.createElement(RoutingContext, renderProps);
+    res.render('base.html', {html: ''});
 
-            const context = {
-                html: ReactDOMServer.renderToString(elt),
-            };
+    // match({ routes, location }, (error, redirectLoc, renderProps) => {
+    //     if (redirectLoc) {
+    //         res.redirect(301, redirectLoc.pathname + redirectLoc.search);
+    //     } else if (error) {
+    //         res.status(500).send(error.message);
+    //     } else if (renderProps === null) {
+    //         res.status(404).send('Not found');
+    //     } else {
+    //         const elt = React.createElement(RoutingContext, renderProps);
 
-            res.render('base.html', context);
-        }
-    });
+    //         const context = {
+    //             html: ReactDOMServer.renderToString(elt),
+    //         };
+
+    //         res.render('base.html', context);
+    //     }
+    // });
 });
 
 app.listen(port);
